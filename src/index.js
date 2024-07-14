@@ -3,20 +3,36 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Video from './pages/Video';
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import Videos from './pages/Videos';
 import VideoDetail from './pages/VideoDetail';
+import NotFound from './pages/NotFound';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <NotFound />,
+    children: [
+      { index: true, element: <Videos /> },
+      { path: 'videos', element: <Videos /> },
+      { path: 'videos/:keyword', element: <Videos /> },
+      { path: 'videos/watch/:videoId', element: <VideoDetail /> },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <RouterProvider router={router}>
     <App />
-    <Routes>
-      <Route path='/' element={<App />} />
-      <Route path='videos' element={<Video />} />
-      <Route path='videos/:videoId' element={<VideoDetail />} />
-    </Routes>
-  </BrowserRouter>
+  </RouterProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

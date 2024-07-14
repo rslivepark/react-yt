@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-export default function Video() {
+export default function Videos() {
   return (
     <div>
-      Video
+      Videos
       <Outlet />
     </div>
   );
