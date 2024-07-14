@@ -1,11 +1,7 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Videos() {
-  return (
-    <div>
-      Videos
-      <Outlet />
-    </div>
-  );
+  const { keyword } = useParams();
+  return <div>Video {keyword ? `${keyword}` : `Hot Trends 🔥`}</div>;
 }
