@@ -6,9 +6,14 @@ export default function SearchHeader() {
   const { keyword } = useParams();
   const nav = useNavigate();
   const [text, setText] = useState('');
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     nav(`/videos/${text}`);
+    setText('');
   };
   useEffect(() => setText(keyword || ''), [keyword]);
   return (
@@ -23,7 +28,7 @@ export default function SearchHeader() {
           type='text'
           placeholder='Search...'
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={handleChange}
         />
         <button className='bg-zinc-600 px-4'>
           <BsSearch />
