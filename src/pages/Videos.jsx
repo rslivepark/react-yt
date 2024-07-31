@@ -3,9 +3,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import VideoCard from '../components/VideoCard';
 import Youtube from '../components/api/youtube';
+import FakeYoutube from '../components/api/fakeYoutube';
+import { useYoutubeApi } from '../context/YoutubeApiContext';
 
 export default function Videos() {
   const { keyword } = useParams();
+  const { youtube } = useYoutubeApi();
   const {
     isLoading,
     error,
@@ -13,7 +16,6 @@ export default function Videos() {
   } = useQuery({
     queryKey: ['videos', keyword],
     queryFn: () => {
-      const youtube = new Youtube();
       return youtube.search(keyword);
     },
   });
